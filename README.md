@@ -16,9 +16,9 @@ TBD
 This repository contains a complete end-to-end data project:
 
 1. Exploratory Data Analysis of stellar properties.
-2. Data cleaning and preprocessing: handling missing values, outliers, and inconsistent records.
-3. Feature engineering: transforming raw physical measurements into features suitable for machine learning.
-4. Model training and evaluation: building and comparing ML models to predict a chosen target (e.g. star type / class or a continuous property such as absolute magnitude).
+2. Data cleaning and preprocessing
+3. Feature engineering.
+4. Model training and evaluation: building and comparing ML models to predict the star type.
 5. Reproducible project structure: separation of raw data, processed data, notebooks, and production-ready Python modules in `src/`.
 
 The project is designed to mimic a real-world data science / ML workflow that i want to use for my portfolio
@@ -76,13 +76,11 @@ Main objectives of this project:
    - Encode categorical variables.
    - Scale / transform numeric features where appropriate.
 3. Build and compare ML models, such as:
-   - Logistic Regression / Linear Regression
    - Decision Tree
    - Random Forest
-   - Gradient Boosting (optional)
+   - Neural network
 4. Evaluate models using appropriate metrics:
    - Classification: accuracy, precision, recall, F1, confusion matrix.
-   - Regression: MAE, RMSE, R².
 5. Document the workflow in a clear and reproducible way.
 
 ---
@@ -93,9 +91,11 @@ Language & Core Libraries
 - Python 3.x
 - NumPy
 - Pandas
-- Matplotlib / Seaborn
+- Matplotlib
+- Seaborn
 - Scikit-learn
 - Jupyter / IPython Notebooks
+- Plotly
 ---
 
 ## Project Structure
@@ -110,18 +110,20 @@ ML-Stellar-Data-Analysis/
 ├── .gitignore
 │
 ├── data/
-│   ├── raw/                # Original, immutable data dump
-│   └── processed/          # Cleaned data, ready for modeling
+│   ├── raw/                # Original, immutable data dump - in this case, raw data is fine for modeling as it is
+│   └── processed/          
 │
 │
 ├── notebooks/      
-│   └── TBA                 # To be Added
+│   └──stellar_analisys_notebook.ipynb    #notebook with full analisys
 │
 ├── src/     
 │   └── TBA                 #To be added
 │
-├── models/                 # Saved models (e.g. model.pkl)
+├── models/                 #to be added
 │
-└── outputs/               #Outputs
+└── outputs/                #Outputs
+
+
 
 
