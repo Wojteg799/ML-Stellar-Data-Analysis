@@ -7,7 +7,15 @@ The goal of this project is to explore relationships between stellar features (e
 
 ## Table of Contents
 
-TBD
+- [Project Overview](#project-overview)
+- [Business / Scientific Motivation](#business--scientific-motivation)
+- [Dataset](#dataset)
+- [Objectives](#objectives)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Results](#results)
 
 ---
 
@@ -16,9 +24,9 @@ TBD
 This repository contains a complete end-to-end data project:
 
 1. Exploratory Data Analysis of stellar properties.
-2. Data cleaning and preprocessing: handling missing values, outliers, and inconsistent records.
-3. Feature engineering: transforming raw physical measurements into features suitable for machine learning.
-4. Model training and evaluation: building and comparing ML models to predict a chosen target (e.g. star type / class or a continuous property such as absolute magnitude).
+2. Data cleaning and preprocessing
+3. Feature engineering.
+4. Model training and evaluation: building and comparing ML models to predict the star type.
 5. Reproducible project structure: separation of raw data, processed data, notebooks, and production-ready Python modules in `src/`.
 
 The project is designed to mimic a real-world data science / ML workflow that i want to use for my portfolio
@@ -76,26 +84,132 @@ Main objectives of this project:
    - Encode categorical variables.
    - Scale / transform numeric features where appropriate.
 3. Build and compare ML models, such as:
-   - Logistic Regression / Linear Regression
    - Decision Tree
    - Random Forest
-   - Gradient Boosting (optional)
+   - Neural network
 4. Evaluate models using appropriate metrics:
    - Classification: accuracy, precision, recall, F1, confusion matrix.
-   - Regression: MAE, RMSE, R².
 5. Document the workflow in a clear and reproducible way.
+
+---
+
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd ML-Stellar-Data-Analysis
+   ```
+
+2. **Create a virtual environment (recommended):**
+   ```bash
+   python -m venv venv
+   
+   # On Windows:
+   venv\Scripts\activate
+   
+   # On Linux/Mac:
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Ensure data file is present:**
+   - The dataset file `stars.csv` should be in `data/raw/` directory
+   - If missing, download from [Kaggle](https://www.kaggle.com/datasets/deepu1109/star-dataset)
+
+---
+
+## Usage
+
+### Running the Complete Pipeline
+
+To run the entire analysis pipeline (preprocessing, visualization, modeling, and evaluation):
+
+```bash
+python src/main.py
+```
+
+This will:
+1. Load and preprocess the data
+2. Create all visualizations (saved to `outputs/`)
+3. Train and optimize three models (Decision Tree, Random Forest, Neural Network)
+4. Evaluate and compare models
+5. Save trained models to `models/`
+6. Generate all plots and visualizations in `outputs/`
+
+### Using Individual Modules
+
+You can also import and use individual modules in your own scripts:
+
+```python
+from src.data_preprocessing import preprocess_pipeline
+from src.models import DecisionTreeModel, RandomForestModel, NeuralNetworkModel
+
+# Preprocess data
+data = preprocess_pipeline()
+
+# Train a specific model
+dt_model = DecisionTreeModel()
+dt_model.optimize(data['X_train_scaled'], data['y_train'])
+results = dt_model.evaluate(data['X_test_scaled'], data['y_test'])
+```
+
+### Jupyter Notebook
+
+For interactive exploration, use the Jupyter notebook:
+```bash
+jupyter notebook notebooks/stellar_analisys_notebook.ipynb
+```
+
+---
+
+## Results
+
+The pipeline generates the following outputs in the `outputs/` directory:
+
+**Visualizations:**
+- `distributions.png` - Distribution of numeric variables
+- `correlation_matrix.png` - Correlation heatmap
+- `3d_scatter.html` - Interactive 3D scatter plot
+- `hr_diagram.html` - Hertzsprung-Russell diagram
+- `ternary_plot.html` - Ternary plot of star parameters
+
+**Model Evaluation:**
+- `decision_tree_visualization.png` - Decision tree structure
+- `decision_tree_confusion_matrix.png` - Decision Tree confusion matrix
+- `random_forest_confusion_matrix.png` - Random Forest confusion matrix
+- `random_forest_pca_decision_boundary.png` - PCA decision boundary visualization
+- `neural_network_confusion_matrix.png` - Neural Network confusion matrix
+- `model_comparison_confusion_matrices.png` - Side-by-side comparison of all models
+
+**Models:**
+- `models/decision_tree_model.pkl` - Trained Decision Tree
+- `models/random_forest_model.pkl` - Trained Random Forest
+- `models/neural_network_model.pkl` - Trained Neural Network
+- `models/scaler.pkl` - Feature scaler for preprocessing new data
+
+**Expected Performance:**
+Based on the analysis, Random Forest typically achieves the highest accuracy (~94-95%) for star type classification, followed by Neural Network (~91-92%) and Decision Tree (~90-91%).
 
 ---
 
 ## Tech Stack
 
-Language & Core Libraries
-- Python 3.x
+**Language & Core Libraries:**
+- Python 3.8+
 - NumPy
 - Pandas
-- Matplotlib / Seaborn
+- Matplotlib
+- Seaborn
 - Scikit-learn
-- Jupyter / IPython Notebooks
+- Plotly
+- Kaleido (for static plot export)
+- Joblib (for model serialization)
+
 ---
 
 ## Project Structure
@@ -105,23 +219,33 @@ This project follows a standard, production-like structure for data/ML work:
 ```bash
 ML-Stellar-Data-Analysis/
 │
-├── README.md               # Project description (this file)
-├── requirements.txt        # Python dependencies
-├── .gitignore
+├── README.md                    # Project description (this file)
+├── requirements.txt             # Python dependencies
 │
 ├── data/
-│   ├── raw/                # Original, immutable data dump
-│   └── processed/          # Cleaned data, ready for modeling
-│
+│   ├── raw/                     # Original, immutable data
+│   │   └── stars.csv            # Raw star dataset
+│   └── processed/                # Processed data (generated)
 │
 ├── notebooks/      
-│   └── TBA                 # To be Added
+│   ├── stellar_analisys_notebook.ipynb    # Jupyter notebook with full analysis
+│   └── stellar_analisys_notebook.py       # Python version of notebook
 │
-├── src/     
-│   └── TBA                 #To be added
+├── src/                          # Source code modules
+│   ├── __init__.py
+│   ├── config.py                 # Configuration and constants
+│   ├── data_preprocessing.py     # Data loading, cleaning, and preprocessing
+│   ├── visualization.py          # All visualization functions
+│   ├── main.py                   # Main script to run complete pipeline
+│   └── models/                   # ML model implementations
+│       ├── __init__.py
+│       ├── decision_tree.py      # Decision Tree model
+│       ├── random_forest.py      # Random Forest model
+│       └── neural_network.py     # Neural Network model
 │
-├── models/                 # Saved models (e.g. model.pkl)
+├── models/                       # Saved trained models (generated)
 │
-└── outputs/               #Outputs
+└── outputs/                      # Generated outputs (plots, visualizations)
+```
 
-
+---
