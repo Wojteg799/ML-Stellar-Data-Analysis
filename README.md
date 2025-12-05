@@ -27,6 +27,9 @@ This repository contains a complete end-to-end data project:
 2. Data cleaning and preprocessing
 3. Feature engineering.
 4. Model training and evaluation: building and comparing ML models to predict the star type.
+2. Data cleaning and preprocessing
+3. Feature engineering.
+4. Model training and evaluation: building and comparing ML models to predict the star type.
 5. Reproducible project structure: separation of raw data, processed data, notebooks, and production-ready Python modules in `src/`.
 
 The project is designed to mimic a real-world data science / ML workflow that i want to use for my portfolio
@@ -86,6 +89,7 @@ Main objectives of this project:
 3. Build and compare ML models, such as:
    - Decision Tree
    - Random Forest
+   - Neural network
    - Neural network
 4. Evaluate models using appropriate metrics:
    - Classification: accuracy, precision, recall, F1, confusion matrix.
@@ -203,6 +207,8 @@ Based on the analysis, Random Forest typically achieves the highest accuracy (~9
 - Python 3.8+
 - NumPy
 - Pandas
+- Matplotlib
+- Seaborn
 - Matplotlib
 - Seaborn
 - Scikit-learn

@@ -11,7 +11,7 @@ from sklearn.impute import KNNImputer
 import warnings
 from pathlib import Path
 
-from src.config import STARS_CSV, NUMERIC_COLUMNS, RANDOM_STATE, TEST_SIZE, OUTPUTS_DIR
+from src.config import STARS_CSV, NUMERIC_COLUMNS, RANDOM_STATE, TEST_SIZE, OUTPUTS_DIR, DATA_PROCESSED
 
 warnings.filterwarnings('ignore')
 
@@ -248,8 +248,8 @@ def preprocess_pipeline(file_path=None, save_processed=False):
     
     # Save processed data if requested
     if save_processed:
-        df.to_csv(OUTPUTS_DIR / "processed_data.csv", index=False)
-        print(f"\nProcessed data saved to {OUTPUTS_DIR / 'processed_data.csv'}")
+        df.to_csv(DATA_PROCESSED / "processed_data.csv", index=False)
+        print(f"\nProcessed data saved to {DATA_PROCESSED / 'processed_data.csv'}")
     
     return {
         'df': df,
